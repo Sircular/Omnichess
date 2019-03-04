@@ -35,6 +35,18 @@
 		<form>
 			Lengths: <input id="lengths" type="text" onchange="updateBoard()" value="8,8"title="Comma-delimited of dimension lengths, from higher dimensions to lower ones" pattern="\\ *\\d+(\\ *,\\ *\\d+)*\\ *"/><br />
 		</form>
+		<h3>Player Controls</h3>
+		<div id="playerPane" class="hdimension">
+			<div class="vdimension cell">
+				<span>
+					<label for="placePieceA">Player A</label>
+					<input id="player-0" type="radio" name="player" checked />
+				</span>
+				<span>Identifier: <input id="player-0" type="text" value="p" /></span>
+				<span>Direction: <input id="direction-0" type="text" value="1,1" /></span>
+				<span>Color: <input id="color-0" type="color" value="#0088FF" /></span>
+			</div>
+		</div>
 		<h3>Piece Controls</h3>
 		<div id="piecePane" class="hdimension">
 			<div class="cell vdimension">
@@ -51,10 +63,10 @@
 					<input id="removePiece" type="radio" name="action" />
 				</span>
 			</div>
-			<div id="emptyPiece" class="vdimension cell">
+			<div class="vdimension cell">
 				<span>
 					<label for="placePieceA">Place Piece</label>
-					<input id="placePieceA" type="radio" name="action" />
+					<input id="placePieceA" type="radio" name="action" onchange="if(document.getElementById('placePieceA').checked) registerCurrentPiece(0);"/>
 				</span>
 				<span>Piece Identifier: <input id="ident-0" type="text" value="p" /></span>
 				<span>Movement: <input id="move-0" type="text" value="(0, 1d);" /></span>
