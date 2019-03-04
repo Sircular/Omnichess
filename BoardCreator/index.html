@@ -1,17 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html onClick="clickHandler();">
 	<head>
 		<title>Board Creator</title>
+		<style>
+			input {
+				margin: 5px;
+			}
+			
+			.cell {
+				border: 1px solid black;
+				text-align: center;
+				font-weight: bolder;
+				margin: 1px;
+			}
+			
+			.hdimension {
+				display: flex;
+				flex-direction: row;
+			}
+			
+			.vdimension {
+				display: flex;
+				flex-direction: column;
+			}
+			
+			#boardDisplay {
+				font-family: monospace;
+			}
+		</style>
 	</head>
 	<body>
+		<h1>Omnichess Game Creator</h1>
+		<h3>Board Controls</h3>
 		<form>
-			Grid Size: <input id="gridwidth" type="number" onchange="updateBoard()" value="50"/><br />
-			Rows: <input id="rows" type="number" onchange="updateBoardSize()" value="8"/><br />
-			Columns: <input id="cols" type="number" onchange="updateBoardSize()" value="8"/><br />
+			Lengths: <input id="lengths" type="text" onchange="updateBoard()" value="8,8"title="Comma-delimited of dimension lengths, from higher dimensions to lower ones" pattern="\\ *\\d+(\\ *,\\ *\\d+)*\\ *"/><br />
 		</form>
-		<canvas width=400 height=400 id="canvas" style="border: 1px solid #000000"></canvas>
-		<p id="output" style="font-family: monospace"></p>
+		<h3>Piece Controls</h3>
+		<div id="piecePane" class="hdimension">
+			<div class="cell vdimension">
+				<span>
+					<label for="boardToggle">Toggle Cell Existence</label>
+					<input id="boardToggle" type="radio" name="action" checked />
+				</span>
+				<span>
+					<label for="selectCell">Select Cell</label>
+					<input id="selectCell" type="radio" name="action" />
+				</span>
+				<span>
+					<label for="removePiece">Remove Pieces</label>
+					<input id="removePiece" type="radio" name="action" />
+				</span>
+			</div>
+			<div id="emptyPiece" class="vdimension cell">
+				<span>
+					<label for="placePieceA">Place Piece</label>
+					<input id="placePieceA" type="radio" name="action" />
+				</span>
+				<span>Piece Identifier: <input id="ident-0" type="text" value="p" /></span>
+				<span>Movement: <input id="move-0" type="text" value="(0, 1d);" /></span>
+				<span>Capture: <input id="capture-0" type="text" value="" /></span>
+				<span>Capture-Movement: <input id="moveCapture-0" type="text" value="(1, 1d);" /></span>
+			</div>
+		</div>
+		<div id="boardDisplay">
+		</div>
 		
-		<script src="./main.js"></script>
+		<script src="./src/MatrixUtilities.js"></script>
+		<script src="./src/Component.js"></script>
+		<script src="./src/Vector.js"></script>
+		<script src="./src/Board.js"></script>
+		<script src="./src/Player.js"></script>
+		<script src="./src/Piece.js"></script>
+		<script src="./src/EndCondition.js"></script>
+		<script src="./src/Turn.js"></script>
+		<script src="./src/Realizer.js"></script>
+		<script src="./src/Game.js"></script>
+		<script src="./src/main.js"></script>
 	</body>
 </html>
