@@ -8,6 +8,7 @@ class Piece
 		this.moveCaptureVectors = [];
 		this.identifier = "";
 		this.player = undefined;
+		this.hasMoved = false;
 	}
 	
 	static Create(baseObj)
@@ -21,6 +22,33 @@ class Piece
 			.setMoveCaptureVectors(Vector.Create(baseObj.moveCapture))
 			.setIdentifier(baseObj.identifier)
 			.setPlayer(baseObj.player);
+	}
+	
+	move()
+	{
+		if (this.hasMoved)
+		{
+			return;
+		}
+		
+		this.moveVectors = this.moveVectors.filter((vector) => {
+			return vector.components.reduce((accumulator, component) => {
+				return (accumulator && !component.initial)
+			}, true);
+		});
+		
+		this.captureVectors = this.captureVectors.filter((vector) => {
+			return vector.components.reduce((accumulator, component) => {
+				return (accumulator && !component.initial)
+			}, true);
+		});
+		
+		this.moveCaptureVectors = this.moveCaptureVectors.filter((vector) => {
+			return vector.components.reduce((accumulator, component) => {
+				return (accumulator && !component.initial)
+			}, true);
+		});
+		this.hasMoved = true;
 	}
 	
 	/**

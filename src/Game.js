@@ -133,6 +133,7 @@ class Game
 	CommitMove(move)
 	{
 		let capturedPiece = "";
+		this.board.contents[move.source].move();
 		if (move.capture)
 		{
 			capturedPiece = this.board.contents[move.target].identifier;

@@ -1,25 +1,25 @@
 /* Represents a component of a vector */
 class Component
 {
-	constructor(length, maxRep, jump, hop, promote)
+	constructor(length, maxRep, jump, hop, initial)
 	{
 		this.length = length;
 		/* Slight efficiency, clean output while debugging */
 		this.maxRep = length !== 0 ? maxRep : 1;
 		this.jump = jump;
 		this.hop = hop;
-		this.promote = promote;
+		this.initial = initial;
 	}
 	
 	static DeepCopy(component)
 	{
-		return new Component(component.length, component.maxRep, component.jump, component.hop, component.promote);
+		return new Component(component.length, component.maxRep, component.jump, component.hop, component.initial);
 	}
 	
 	toString()
 	{
 		return this.length + (this.maxRep > 1 ? "{" + this.maxRep + "}" : "") + 
-			(this.jump ? "j" : "") + (this.hop ? "h" : "") + (this.promote ? "p" : "")
+			(this.jump ? "j" : "") + (this.hop ? "h" : "") + (this.initial ? "i" : "")
 	}
 
 	static Create(localFlags, globalFlags)
@@ -30,7 +30,7 @@ class Component
 			1,
 			localFlags.includes("j") || globalFlags.includes("j"),
 			localFlags.includes("h") || globalFlags.includes("h"),
-			localFlags.includes("p") || globalFlags.includes("p")
+			localFlags.includes("i") || globalFlags.includes("i")
 		);
 
 		const globalFiniteRepetition = globalFlags.match(/{(\d+)}/);
