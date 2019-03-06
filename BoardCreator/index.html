@@ -7,11 +7,24 @@
 				margin: 5px;
 			}
 			
+			button {
+				margin: 5px;
+			}
+			
+			h3 {
+				margin-top: 3px;
+				margin-bottom: 3px;
+			}
+			
 			.cell {
 				border: 1px solid black;
 				text-align: center;
 				font-weight: bolder;
 				margin: 1px;
+			}
+			
+			.canClick {
+				cursor: pointer;
 			}
 			
 			.hdimension {
@@ -36,13 +49,14 @@
 			Lengths: <input id="lengths" type="text" onchange="updateBoard()" value="8,8"title="Comma-delimited of dimension lengths, from higher dimensions to lower ones" pattern="\\ *\\d+(\\ *,\\ *\\d+)*\\ *"/><br />
 		</form>
 		<h3>Player Controls</h3>
+		<button onclick="addNewPlayer();">Add New Player</button>
 		<div id="playerPane" class="hdimension">
 			<div class="vdimension cell">
 				<span>
-					<label for="placePieceA">Player A</label>
-					<input id="player-0" type="radio" name="player" checked />
+					<label>Select Player</label>
+					<input id="player-0" type="radio" name="player" checked onchange="if(document.getElementById('player-0').checked) registerCurrentPiece(0);"/>
 				</span>
-				<span>Identifier: <input id="player-0" type="text" value="White" /></span>
+				<span>Identifier: <input id="playerIdent-0" type="text" value="White" /></span>
 				<span>Direction: <input id="direction-0" type="text" value="1,1" /></span>
 				<span>Color: <input id="color-0" type="color" value="#0088FF" /></span>
 			</div>

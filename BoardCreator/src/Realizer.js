@@ -113,7 +113,7 @@ class Realizer
 			const cellIndex = matrix; /* Rename for clarity */
 			
 			const cell = document.createElement("div");
-			cell.className = "cell";
+			cell.className = "cell canClick";
 			let contents = "&nbsp";
 			const backgroundColor = this.DetermineBackgroundColor(cellIndex, offsetColoring);
 			const foregroundColor = this.DetermineForegroundColor(cellIndex, offsetColoring);

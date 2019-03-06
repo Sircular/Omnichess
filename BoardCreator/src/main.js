@@ -2,6 +2,7 @@ let board = new Board(Board.Generate([8, 8]));
 let realizer = new Realizer(board);
 let currentPieceIndex = 0;
 let currentPlayerIndex = 0;
+
 realizer.Realize();
 
 function clickHandler()
@@ -23,7 +24,12 @@ function updateBoard()
 
 function registerCurrentPiece(index)
 {
-	currentPieceIndex = 0;
+	currentPieceIndex = index;
+}
+
+function registerCurrentPlayer(index)
+{
+	currentPlayerIndex = index;
 }
 
 function processClick(event, cellIndex)
@@ -68,15 +74,31 @@ function constructPiece()
 	newPiece.setMoveCaptureVectors(Vector.Create(document.getElementById("moveCapture-" + currentPieceIndex).value));
 	newPiece.setIdentifier(document.getElementById("ident-" + currentPieceIndex).value);
 	newPiece.setPlayer(constructPlayer());
+	newPiece.setDirection(newPiece.player.direction);
 	
 	return newPiece;
 }
 
 function constructPlayer()
 {
-	let identifier = document.getElementById("player-" + currentPlayerIndex).value;
+	let identifier = document.getElementById("playerIdent-" + currentPlayerIndex).value;
 	let direction = document.getElementById("direction-" + currentPlayerIndex).value.split(",");
 	let color = document.getElementById("color-" + currentPlayerIndex).value;
 	
 	return new Player(identifier, direction, [], [], color);
+}
+
+function addNewPlayer()
+{
+	const playerPane = document.getElementById("playerPane");
+	
+	const newPlayerCell = document.createElement("div");
+	newPlayerCell.className = "vdimension cell";
+	const playerIndex = playerPane.childElementCount;
+	newPlayerCell.innerHTML = "<span><label>Select Player</label><input id='player-" + playerIndex + "' type='radio' name='player' onchange='if(document.getElementById(\"player-" + playerIndex +"\").checked) registerCurrentPlayer(" + playerIndex + ");'/></span>" + 
+	"<span>Identifier: <input id='playerIdent-" + playerIndex + "' type='text' value='" + playerIndex + "' /></span>" + 
+	"<span>Direction: <input id='direction-" + playerIndex + "' type='text' value='1,1' /></span>" + 
+	"<span>Color: <input id='color-" + playerIndex + "' type='color' value='#0088FF' /></span>";
+	
+	playerPane.appendChild(newPlayerCell);
 }
