@@ -102,3 +102,20 @@ function addNewPlayer()
 	
 	playerPane.appendChild(newPlayerCell);
 }
+
+function addNewPiece()
+{
+	const piecePane = document.getElementById("piecePane");
+	
+	const newPieceCell = document.createElement("div");
+	newPieceCell.className = "vdimension cell";
+	const pieceIndex = piecePane.childElementCount;
+	newPieceCell.innerHTML = "<span><label for='placePiece" + pieceIndex + "'>Place Piece</label>" + 
+		"<input id='placePiece" + pieceIndex + "' type='radio' name='action' onchange='if(document.getElementById(\"placePiece" + 
+		pieceIndex + "\").checked) registerCurrentPiece(" + pieceIndex + ");'/></span><span>Piece Identifier: <input id='ident-" + 
+		pieceIndex + "' type='text' value='p' /></span><span>Movement: <input id='move-" + pieceIndex + "' type='text' value='(0, 1d);' />" + 
+		"</span><span>Capture: <input id='capture-" + pieceIndex + "' type='text' value='' /></span><span>Capture-Movement: " + 
+		"<input id='moveCapture-" + pieceIndex + "' type='text' value='(1, 1d);' /></span>";
+
+	piecePane.appendChild(newPieceCell);
+}
